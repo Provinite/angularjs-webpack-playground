@@ -1,4 +1,6 @@
-class ngDependencyMap {
+const { NgDependency } = require("./NgDependency");
+const ngDeps = require("ng-dependencies");
+class NgDependencyMap {
   /**
    * Create a map of all ng dependencies amongst the provided webpack modules
    * @param {import("webpack").Module[]} modules
@@ -36,9 +38,12 @@ class ngDependencyMap {
 
   /**
    * @private
-   * @param {*} theModule 
+   * Wrapper for `ngDeps` package. Runs ngDeps against a webpack module & returns
+   * the result.
+   * @param {import("webpack").Module} theModule
    */
   _getNgDeps(theModule) {
+    let source;
     try {
       source = theModule.originalSource().source();
     } catch (e) {
@@ -86,7 +91,7 @@ class ngDependencyMap {
   getNgWebpackDependencies(webpackModuleId) {
     return this.getNgModuleDependencies(webpackModuleId)
       .map(ngModuleName => {
-        const providerModule = getProviderModule(ngModuleName);
+        const providerModule = this.getProviderModule(ngModuleName);
         if (providerModule) {
           return new NgDependency(providerModule, ngModuleName);
         } else {
@@ -96,3 +101,5 @@ class ngDependencyMap {
       .filter(truthy => truthy);
   }
 }
+
+module.exports = { NgDependencyMap };
