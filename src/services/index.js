@@ -1,0 +1,1 @@
+angular.module("myApp.service", ["myApp.service.the"]);
