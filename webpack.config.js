@@ -1,6 +1,6 @@
 var path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const globImporter = require('node-sass-glob-importer');
+const globImporter = require("node-sass-glob-importer");
 
 // Build features:
 // - Source Maps
@@ -8,17 +8,16 @@ const globImporter = require('node-sass-glob-importer');
 // - Load all JS (app.js + require.context)
 // - Ignore order for angularjs purposes (patchAngular.js)
 // - Sass parsing (including globs)
-// - TODO: AngularJS template handling
+// - AngularJS template handling!
 // - TODO: Env var access
-// - TODO: ngAnnotate
+// - ngAnnotate
 
 module.exports = {
   entry: "./src/app.js",
   context: path.resolve(__dirname),
   mode: "development",
   devtool: "inline-source-map",
-  devServer: {
-  },
+  devServer: {},
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html"
@@ -28,12 +27,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"]
+        use: [
+          { loader: "ng-annotate-loader" },
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"]
+            }
           }
-        }
+        ]
       },
       {
         test: /\.(html)$/,
@@ -66,7 +68,7 @@ module.exports = {
                 importer: globImporter()
               }
             }
-          },
+          }
         ]
       }
     ]
