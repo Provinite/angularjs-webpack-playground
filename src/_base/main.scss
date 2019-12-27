@@ -1,0 +1,11 @@
+$red: #0000FF;
+body {
+  background-color: $red;
+}
+
+// Load all other base scss (exclude this file to prevent a loop)
+@import "./!(main)*.scss";
+// This import is a little funny due to (what seems to be) a bug with the sass glob importer
+// if we don't go ../../src/, and instead just do ../, it attempts to load a huge set of files
+// that don't exist, and crashes the build
+@import "../../src/!(_base)/**/*.scss";

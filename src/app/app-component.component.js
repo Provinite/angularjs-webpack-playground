@@ -10,5 +10,5 @@ angular.module("myApp.app").component("appComponent", {
     })();
   },
   controllerAs: "vm",
-  template: "<div>{{vm.foo}}</div>"
+  templateUrl: "app/app-component.component.html"
 });

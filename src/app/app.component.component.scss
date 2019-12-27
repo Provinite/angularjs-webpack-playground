@@ -1,0 +1,5 @@
+div.foo {
+  font-size: 100pt;
+  // demonstrating usage of variables declared in _base files
+  color: $orange;
+}
