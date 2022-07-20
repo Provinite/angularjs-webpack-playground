@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "angular": "1.5.9",
+    "angular": "1.8.3",
     "ng-dependencies": "^0.8.1",
     "path": "^0.12.7"
   },
